@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import Button from './components/Button';
 
 function App() {
   return (
-    <div>
-      <h1 className="bg-green-300">Hello world</h1>
+    <div className="flex items-center justify-center min-h-screen">
+      <div>
+        <Button></Button>
+      </div>
     </div>
   );
 }
