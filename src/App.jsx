@@ -2,7 +2,7 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="min-h-screen">
       <Login />
     </div>
   );
