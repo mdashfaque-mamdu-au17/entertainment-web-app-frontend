@@ -2,10 +2,14 @@ import React from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Input, InputBoxWrapper, Heading, Title } from '../components';
+import logo from '../assets/logo.svg';
 
 const Login = () => {
   return (
-    <div>
+    <div className="">
+      <div className="pt-12 pb-[58px] md:pt-20 md:pb-[72px] lg:pt-[78px] lg:pb-[83px]">
+        <img src={logo} alt="" className="w-8 h-[25px] mx-auto" />
+      </div>
       <InputBoxWrapper>
         <Formik
           initialValues={{ email: '', password: '' }}
