@@ -1,7 +1,12 @@
 import React from 'react';
+import RootLayout from './RootLayout';
 
 const TvSeries = () => {
-  return <div>TvSeries</div>;
+  return (
+    <RootLayout>
+      <h3>Tvseries</h3>
+    </RootLayout>
+  );
 };
 
 export default TvSeries;
