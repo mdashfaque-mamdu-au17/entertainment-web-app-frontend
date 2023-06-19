@@ -1,5 +1,6 @@
 import React from 'react';
 import RootLayout from './RootLayout';
+import { useGlobalContext } from '../../context';
 
 const Home = () => {
   return (
