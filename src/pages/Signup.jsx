@@ -3,8 +3,27 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Input, InputBoxWrapper, Heading, Title } from '../components';
 import logo from '../assets/logo.svg';
+import { useMutation } from '@tanstack/react-query';
+import customFetch from '../utils/axios';
 
 const Signup = () => {
+  const { mutate: signupHandler, isLoading } = useMutation({
+    mutationKey: ['signup'],
+    mutationFn: async ({ email, password }) => {
+      const result = await customFetch.post('/auth/register', {
+        email,
+        password,
+      });
+      console.log(result);
+    },
+    onSuccess: () => {
+      alert('successful');
+    },
+    onError: (error) => {
+      console.log(error?.response?.data?.msg);
+    },
+  });
+
   return (
     <div className="">
       <div className="pt-12 pb-[58px] md:pt-20 md:pb-[72px] lg:pt-[78px] lg:pb-[83px]">
@@ -26,6 +45,7 @@ const Signup = () => {
           })}
           onSubmit={(values, { setSubmitting, resetForm }) => {
             console.log({ ...values });
+            signupHandler({ email: values.email, password: values.password });
             resetForm();
           }}
         >
