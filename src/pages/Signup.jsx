@@ -90,7 +90,6 @@ const Signup = () => {
           }}
         >
           {(formik) => {
-            console.log(formik.isSubmitting, 'is submitting');
             return (
               <Form className="px-6 pt-6 pb-[26px] md:px-8 md:py-8">
                 <Heading>Sign Up</Heading>
@@ -120,8 +119,12 @@ const Signup = () => {
                   />
                 </div>
                 <div className="pt-10 md:pt-6">
-                  <Button type="submit" disabled={formik.isSubmitting}>
-                    Create an account
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    style={isLoading && 'cursor-wait hover:cursor-wait'}
+                  >
+                    {isLoading ? 'Submitting...' : 'Create an account'}
                   </Button>
                 </div>
                 <div className="flex flex-row gap-2 pt-6 justify-center items-center">

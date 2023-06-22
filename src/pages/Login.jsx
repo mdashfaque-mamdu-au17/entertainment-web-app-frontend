@@ -20,7 +20,6 @@ const Login = () => {
       const result = await customFetch.post('/auth/login', { email, password });
       updateLoginUserInfo(result.data.user);
       addUserToLocalStorage(result.data.user);
-      console.log(result, 'result');
     },
     onSuccess: () => {
       toast.success('Loged in Successfully!', {
@@ -54,6 +53,7 @@ const Login = () => {
     }
   }, [user]);
 
+  console.log(isLoading, 'is loading state');
   return (
     <div className="">
       <div className="pt-12 pb-[58px] md:pt-20 md:pb-[72px] lg:pt-[78px] lg:pb-[83px]">
@@ -102,7 +102,13 @@ const Login = () => {
                   />
                 </div>
                 <div className="pt-10">
-                  <Button type="submit">Login to your account</Button>
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    style={isLoading && 'cursor-wait hover:cursor-wait'}
+                  >
+                    {isLoading ? 'Submitting...' : 'Login to your account'}
+                  </Button>
                 </div>
                 <div className="flex flex-row gap-2 pt-6 justify-center items-center">
                   <Title type="medium" color="white">
