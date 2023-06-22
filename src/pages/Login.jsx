@@ -1,10 +1,59 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button, Input, InputBoxWrapper, Heading, Title } from '../components';
 import logo from '../assets/logo.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../context';
+import { useMutation } from '@tanstack/react-query';
+import customFetch from '../utils/axios';
+import { toast } from 'react-toastify';
+import { addUserToLocalStorage } from '../utils/localStorage';
 
 const Login = () => {
+  const { user, updateLoginUserInfo } = useGlobalContext();
+  const navigate = useNavigate();
+
+  const { mutate: loginHandler, isLoading } = useMutation({
+    mutationKey: ['login'],
+    mutationFn: async ({ email, password }) => {
+      const result = await customFetch.post('/auth/login', { email, password });
+      updateLoginUserInfo(result.data.user);
+      addUserToLocalStorage(result.data.user);
+      console.log(result, 'result');
+    },
+    onSuccess: () => {
+      toast.success('Loged in Successfully!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+    },
+    onError: (error) => {
+      toast.error(error?.response?.data?.msg, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+    },
+  });
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
+
   return (
     <div className="">
       <div className="pt-12 pb-[58px] md:pt-20 md:pb-[72px] lg:pt-[78px] lg:pb-[83px]">
@@ -21,9 +70,14 @@ const Login = () => {
               .min(6, 'Invalid password')
               .required("Can't be empty"),
           })}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            console.log({ ...values });
-            resetForm();
+          onSubmit={async (values, { setSubmitting, resetForm }) => {
+            setSubmitting(true);
+            try {
+              loginHandler({ email: values.email, password: values.password });
+            } catch (error) {
+              console.log(error);
+            }
+            setSubmitting(false);
           }}
         >
           {(formik) => {
@@ -55,7 +109,7 @@ const Login = () => {
                     Don't have an account?
                   </Title>
                   <Title type="medium" color="red">
-                    <a href="">Sign Up</a>
+                    <Link to="/signup">Sign Up</Link>
                   </Title>
                 </div>
               </Form>

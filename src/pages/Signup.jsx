@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 import { Button, Input, InputBoxWrapper, Heading, Title } from '../components';
 import logo from '../assets/logo.svg';
 import { useMutation } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
+import { addUserToLocalStorage } from '../utils/localStorage';
+import { useGlobalContext } from '../context';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
+  const { user, updateLoginUserInfo } = useGlobalContext();
+  const navigate = useNavigate();
+
   const { mutate: signupHandler, isLoading } = useMutation({
     mutationKey: ['signup'],
     mutationFn: async ({ email, password }) => {
@@ -14,15 +21,40 @@ const Signup = () => {
         email,
         password,
       });
-      console.log(result);
+      updateLoginUserInfo(result.data.user);
+      addUserToLocalStorage(result.data.user);
     },
     onSuccess: () => {
-      alert('successful');
+      toast.success('Registered Successfully!', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
     },
     onError: (error) => {
-      console.log(error?.response?.data?.msg);
+      toast.error(error?.response?.data?.msg, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user]);
 
   return (
     <div className="">
@@ -43,13 +75,22 @@ const Signup = () => {
               .required("Can't be empty")
               .oneOf([Yup.ref('password')], 'password must match'),
           })}
-          onSubmit={(values, { setSubmitting, resetForm }) => {
+          onSubmit={async (values, { setSubmitting, resetForm }) => {
             console.log({ ...values });
-            signupHandler({ email: values.email, password: values.password });
-            resetForm();
+            setSubmitting(true);
+            try {
+              signupHandler({
+                email: values.email,
+                password: values.password,
+              });
+            } catch (error) {
+              console.log(error);
+            }
+            setSubmitting(false);
           }}
         >
           {(formik) => {
+            console.log(formik.isSubmitting, 'is submitting');
             return (
               <Form className="px-6 pt-6 pb-[26px] md:px-8 md:py-8">
                 <Heading>Sign Up</Heading>
@@ -79,14 +120,16 @@ const Signup = () => {
                   />
                 </div>
                 <div className="pt-10 md:pt-6">
-                  <Button type="submit">Create an account</Button>
+                  <Button type="submit" disabled={formik.isSubmitting}>
+                    Create an account
+                  </Button>
                 </div>
                 <div className="flex flex-row gap-2 pt-6 justify-center items-center">
                   <Title type="medium" color="white">
                     Already have an account?
                   </Title>
                   <Title type="medium" color="red">
-                    <a href="">Login</a>
+                    <Link to="/login">Login</Link>
                   </Title>
                 </div>
               </Form>
