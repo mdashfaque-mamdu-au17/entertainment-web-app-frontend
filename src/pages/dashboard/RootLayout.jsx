@@ -64,7 +64,7 @@ const RootLayout = ({ children }) => {
           <div className="absolute top-14 sm:top-[95px] right-0 sm:right-6">
             <Button
               type="btn"
-              style="w-[120px] md:w-[120px]"
+              style="w-[110px] sm:w-[110px] md:w-[110px]"
               onClick={logoutUser}
             >
               Logout
@@ -115,7 +115,7 @@ const RootLayout = ({ children }) => {
           {/* avatar */}
           {showLogout && (
             <div className="absolute bottom-6 left-24 z-50">
-              <Button type="btn" style="md:w-[120px]" onClick={logoutUser}>
+              <Button type="btn" style="lg:w-[120px]" onClick={logoutUser}>
                 Logout
               </Button>
             </div>
