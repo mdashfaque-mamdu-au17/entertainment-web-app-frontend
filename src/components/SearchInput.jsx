@@ -32,7 +32,7 @@ const SearchInput = ({
           value={value}
           onChange={onChange}
           className={classNames(
-            'w-full focus:outline-none bg-inherit text-base placeholder:text-primary-white/100/50 text-primary-white sm:text-2xl lg:pb-[15px] lg:focus:border-b-[1px] lg:focus:border-b-greyish-blue'
+            'w-full focus:outline-none bg-inherit text-base placeholder:text-primary-white/50 placeholder:font-light text-primary-white sm:text-2xl lg:pb-[15px] lg:focus:border-b-[1px] lg:focus:border-b-greyish-blue'
           )}
         />
       </div>

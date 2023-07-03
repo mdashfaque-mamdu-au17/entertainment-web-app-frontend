@@ -9,6 +9,7 @@ import Input from './Input';
 import InputBoxWrapper from './InputBoxWrapper';
 import Heading from './Heading';
 import Title from './Title';
+import TitleHeading from './TitleHeading';
 export {
   Button,
   Input,
@@ -21,4 +22,5 @@ export {
   SingleMovie,
   SubTitle,
   TrendingMovie,
+  TitleHeading,
 };
