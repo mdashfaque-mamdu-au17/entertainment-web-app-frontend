@@ -4,6 +4,7 @@ import { useGlobalContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from '../../components/SearchInput';
 import TrendingMovie from '../../components/TrendingMovie';
+import SingleMovie from '../../components/SingleMovie';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,6 +37,10 @@ const Home = () => {
 
       <div className="mt-6 px-4 sm:mt-[33px] sm:px-[25px] lg:mt-16 lg:px-0 lg:ml-[128px] lg:px-8">
         <TrendingMovie />
+      </div>
+
+      <div className="px-4 sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8 mt-20">
+        <SingleMovie />
       </div>
     </RootLayout>
   );

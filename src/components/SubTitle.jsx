@@ -9,6 +9,9 @@ const SubTitle = ({ type, children }) => {
     if (type === 'trending') {
       return 'text-xs font-light sm:text-[15px]';
     }
+    if (type === 'normal') {
+      return 'text-[11px] font-light sm:text-[13px] text-primary-white/75';
+    }
   };
   return (
     <p className={classNames(applyCommonStyle(), applyStyle())}>{children}</p>
