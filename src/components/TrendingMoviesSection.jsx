@@ -131,11 +131,6 @@ const TrendingMoviesSection = () => {
         <TitleHeading>Trending</TitleHeading>
       </div>
 
-      {/* Loading state */}
-      {/* <div className="pl-4 sm:pl-[25px] lg:pl-9 mt-4 sm:mt-[25px]">
-        <TrendingMovieSkelton />
-      </div> */}
-
       <div className="pl-4 sm:pl-[25px] lg:pl-9 mt-4 sm:mt-[25px]">
         {isLoading && <TrendingMovieLoader />}
         {!isLoading && data.movies.length > 0 && (
