@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
-import { TitleHeading, TrendingMovie } from './index';
+import { TitleHeading, TrendingMovie, TrendingMovieLoader } from './index';
 import { useQuery } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -131,22 +131,30 @@ const TrendingMoviesSection = () => {
         <TitleHeading>Trending</TitleHeading>
       </div>
 
+      {/* Loading state */}
+      {/* <div className="pl-4 sm:pl-[25px] lg:pl-9 mt-4 sm:mt-[25px]">
+        <TrendingMovieSkelton />
+      </div> */}
+
       <div className="pl-4 sm:pl-[25px] lg:pl-9 mt-4 sm:mt-[25px]">
-        <Swiper
-          slidesPerView={responsiveData.slidersPerView}
-          spaceBetween={responsiveData.gap}
-          freeMode={true}
-          modules={[FreeMode]}
-          className="mySwiper"
-        >
-          {data?.movies?.map((movie) => {
-            return (
-              <SwiperSlide key={movie?._id}>
-                <TrendingMovie {...movie} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
+        {isLoading && <TrendingMovieLoader />}
+        {!isLoading && data.movies.length > 0 && (
+          <Swiper
+            slidesPerView={responsiveData.slidersPerView}
+            spaceBetween={responsiveData.gap}
+            freeMode={true}
+            modules={[FreeMode]}
+            className="mySwiper"
+          >
+            {data?.movies?.map((movie) => {
+              return (
+                <SwiperSlide key={movie?._id}>
+                  <TrendingMovie {...movie} />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
+        )}
       </div>
     </section>
   );
