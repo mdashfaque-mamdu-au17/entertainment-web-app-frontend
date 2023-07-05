@@ -139,21 +139,13 @@ const TrendingMoviesSection = () => {
           modules={[FreeMode]}
           className="mySwiper"
         >
-          <SwiperSlide>
-            <TrendingMovie />
-          </SwiperSlide>
-          <SwiperSlide>
-            <TrendingMovie />
-          </SwiperSlide>
-          <SwiperSlide>
-            <TrendingMovie />
-          </SwiperSlide>
-          <SwiperSlide>
-            <TrendingMovie />
-          </SwiperSlide>
-          <SwiperSlide>
-            <TrendingMovie />
-          </SwiperSlide>
+          {data?.movies?.map((movie) => {
+            return (
+              <SwiperSlide key={movie?._id}>
+                <TrendingMovie {...movie} />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </section>
