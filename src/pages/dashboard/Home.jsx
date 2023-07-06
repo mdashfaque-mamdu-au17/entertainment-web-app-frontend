@@ -3,8 +3,10 @@ import RootLayout from './RootLayout';
 import { useGlobalContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from '../../components/SearchInput';
-import SingleMovie from '../../components/SingleMovie';
 import TrendingMoviesSection from '../../components/TrendingMoviesSection';
+import { useQuery } from '@tanstack/react-query';
+import customFetch from '../../utils/axios';
+import AllMoviesSection from '../../components/AllMoviesSection';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,6 +22,14 @@ const Home = () => {
       navigate('/login');
     }
   }, [user]);
+
+  const { isLoading, data, isError, error } = useQuery({
+    queryKey: ['getAllMovies'],
+    queryFn: async () => {
+      const { data } = await customFetch.get('/movies');
+      return data;
+    },
+  });
 
   return (
     <RootLayout>
@@ -41,8 +51,13 @@ const Home = () => {
       </div>
 
       {/* Recommended Movies */}
-      <div className="px-4 sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8 mt-20">
-        <SingleMovie />
+      <div className="px-4 mt-6 sm:mt-10 sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8">
+        <AllMoviesSection
+          isLoading={isLoading}
+          data={data}
+          isError={isError}
+          error={error}
+        />
       </div>
 
       {/* Search Results */}
