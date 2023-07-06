@@ -133,7 +133,12 @@ const TrendingMoviesSection = () => {
 
       <div className="pl-4 sm:pl-[25px] lg:pl-9 mt-4 sm:mt-[25px]">
         {isLoading && <TrendingMovieLoader />}
-        {!isLoading && data.movies.length > 0 && (
+        {!isLoading && isError && (
+          <h2 className="text-lg sm:text-xxl text-primary-white">
+            {error?.message}
+          </h2>
+        )}
+        {!isLoading && !isError && data.movies.length > 0 && (
           <Swiper
             slidesPerView={responsiveData.slidersPerView}
             spaceBetween={responsiveData.gap}
