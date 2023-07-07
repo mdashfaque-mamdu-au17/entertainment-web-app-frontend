@@ -17,7 +17,7 @@ const SearchInput = ({
         <img
           src={searchIcon}
           alt="search-icon"
-          className="w-6 h-6 sm:w-8 sm:h-8"
+          className="w-6 h-6 sm:w-8 sm:h-8 object-cover"
         />
       </div>
       <div className="relative w-full">
