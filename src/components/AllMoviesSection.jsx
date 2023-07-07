@@ -2,7 +2,6 @@ import React from 'react';
 import { SingleMovie, SingleMoviesLoader, TitleHeading } from './index';
 
 const AllMoviesSection = ({ isLoading, data, isError, error }) => {
-  console.log({ isLoading, data, isError, error });
   return (
     <section>
       {!isError && <TitleHeading>Recommended for you</TitleHeading>}
