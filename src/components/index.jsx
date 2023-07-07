@@ -12,8 +12,11 @@ import Title from './Title';
 import TitleHeading from './TitleHeading';
 import TrendingMovieSkelton from './TrendingMovieSkelton';
 import TrendingMovieLoader from './TrendingMovieLoader';
+import TrendingMoviesSection from './TrendingMoviesSection';
 import SingleMovieSkelton from './SingleMovieSkelton';
 import SingleMoviesLoader from './SingleMoviesLoader';
+import SearchResults from './SearchResults';
+import AllMoviesSection from './AllMoviesSection';
 
 export {
   Button,
@@ -32,4 +35,7 @@ export {
   TrendingMovieLoader,
   SingleMovieSkelton,
   SingleMoviesLoader,
+  SearchResults,
+  AllMoviesSection,
+  TrendingMoviesSection,
 };
