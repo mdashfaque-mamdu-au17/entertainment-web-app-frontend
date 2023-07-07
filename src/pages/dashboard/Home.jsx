@@ -42,7 +42,7 @@ const Home = () => {
 
   return (
     <RootLayout>
-      <div className="mt-6 px-4 sm:mt-[33px] sm:px-[25px] lg:mt-16 lg:px-0 lg:ml-[128px] lg:px-8">
+      <div className="mt-6 px-4 sm:mt-[33px] sm:px-[25px] lg:mt-16 lg:px-0 lg:ml-[128px] lg:px-8 z-20">
         <SearchInput
           id="homeSearch"
           name="homeSearch"
@@ -63,7 +63,7 @@ const Home = () => {
 
       {/* Recommended Movies */}
       {!searchTerm && (
-        <div className="px-4 mt-6 sm:mt-10 sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8">
+        <div className="px-4 mt-6 sm:mt-10 sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8 z-20">
           <AllMoviesSection
             isLoading={isLoading}
             data={data}

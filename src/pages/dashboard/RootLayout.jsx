@@ -22,7 +22,7 @@ const RootLayout = ({ children }) => {
   return (
     <>
       {/* for mobile and tablet */}
-      <header className="bg-semi-dark-blue h-14 flex items-center justify-between px-4 sm:h-[72px] sm:px-6 sm:mx-[25px] sm:mt-[23px] sm:rounded-[10px] lg:hidden">
+      <header className="bg-semi-dark-blue h-14 flex items-center justify-between px-4 sm:h-[72px] sm:px-6 sm:mx-[25px] sm:mt-[23px] sm:rounded-[10px] lg:hidden z-50">
         {/* logo */}
         <div>
           <img
@@ -61,10 +61,10 @@ const RootLayout = ({ children }) => {
 
         {/* avatar */}
         {showLogout && (
-          <div className="absolute top-14 sm:top-[95px] right-0 sm:right-6">
+          <div className="absolute top-14 sm:top-[95px] right-0 sm:right-6 z-50">
             <Button
               type="btn"
-              style="w-[110px] sm:w-[110px] md:w-[110px]"
+              style="w-[140px] sm:w-[110px] md:w-[110px]"
               onClick={logoutUser}
             >
               Logout
@@ -76,7 +76,7 @@ const RootLayout = ({ children }) => {
         </button>
       </header>
 
-      <header className="hidden lg:block lg:fixed lg:top-8 lg:left-8 bg-semi-dark-blue w-24 h-[900px] rounded-[20px]">
+      <header className="hidden lg:block lg:fixed lg:top-8 lg:left-8 bg-semi-dark-blue w-24 h-[900px] rounded-[20px] z-50">
         <div>
           {/* logo */}
           <div className="absolute top-9 right-1/2 transform translate-x-1/2">
