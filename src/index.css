@@ -57,3 +57,25 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #161d2f whitesmoke;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #161d2f;
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: whitesmoke;
+  border-radius: 14px;
+  border: 3px solid #161d2f;
+}
