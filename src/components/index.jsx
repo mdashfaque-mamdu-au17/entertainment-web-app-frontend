@@ -17,6 +17,7 @@ import SingleMovieSkelton from './SingleMovieSkelton';
 import SingleMoviesLoader from './SingleMoviesLoader';
 import SearchResults from './SearchResults';
 import AllMoviesSection from './AllMoviesSection';
+import MoviesSection from './MoviesSection';
 
 export {
   Button,
@@ -38,4 +39,5 @@ export {
   SearchResults,
   AllMoviesSection,
   TrendingMoviesSection,
+  MoviesSection,
 };
