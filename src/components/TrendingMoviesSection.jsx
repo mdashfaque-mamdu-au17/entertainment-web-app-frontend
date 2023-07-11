@@ -16,7 +16,9 @@ const TrendingMoviesSection = () => {
 
   useLayoutEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 420) {
+      if (window.innerWidth <= 390) {
+        setResponsiveData({ ...responsiveData, slidersPerView: 1.4, gap: 16 });
+      } else if (window.innerWidth > 390 && window.innerWidth <= 420) {
         setResponsiveData({ ...responsiveData, slidersPerView: 1.5, gap: 16 });
       } else if (window.innerWidth > 420 && window.innerWidth <= 480) {
         setResponsiveData({ ...responsiveData, slidersPerView: 1.7, gap: 16 });
