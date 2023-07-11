@@ -18,6 +18,7 @@ import SingleMoviesLoader from './SingleMoviesLoader';
 import SearchResults from './SearchResults';
 import AllMoviesSection from './AllMoviesSection';
 import MoviesSection from './MoviesSection';
+import TvSeriesSection from './TvSeriesSection';
 
 export {
   Button,
@@ -40,4 +41,5 @@ export {
   AllMoviesSection,
   TrendingMoviesSection,
   MoviesSection,
+  TvSeriesSection,
 };
