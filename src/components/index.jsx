@@ -19,6 +19,7 @@ import SearchResults from './SearchResults';
 import AllMoviesSection from './AllMoviesSection';
 import MoviesSection from './MoviesSection';
 import TvSeriesSection from './TvSeriesSection';
+import BookmarksSection from './BookmarksSection';
 
 export {
   Button,
@@ -42,4 +43,5 @@ export {
   TrendingMoviesSection,
   MoviesSection,
   TvSeriesSection,
+  BookmarksSection,
 };

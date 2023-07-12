@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import customFetch from '../../utils/axios';
 
 const Movies = () => {
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
   const { user } = useGlobalContext();
   const navigate = useNavigate();
 
@@ -34,8 +34,6 @@ const Movies = () => {
     data?.movies?.filter((movie) => {
       return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
     });
-
-  console.log(searchTerm, 'search term');
 
   return (
     <RootLayout>

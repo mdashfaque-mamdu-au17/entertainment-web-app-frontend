@@ -53,7 +53,6 @@ const Login = () => {
     }
   }, [user]);
 
-  console.log(isLoading, 'is loading state');
   return (
     <div className="">
       <div className="pt-12 pb-[58px] md:pt-20 md:pb-[72px] lg:pt-[78px] lg:pb-[83px]">

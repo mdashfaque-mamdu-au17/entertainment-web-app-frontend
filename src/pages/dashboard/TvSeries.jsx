@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import customFetch from '../../utils/axios';
 
 const TvSeries = () => {
-  const [searchTerm, setSearchTerm] = useState();
+  const [searchTerm, setSearchTerm] = useState('');
   const { user } = useGlobalContext();
   const navigate = useNavigate();
 
