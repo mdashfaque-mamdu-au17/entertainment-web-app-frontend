@@ -3,10 +3,14 @@ import { BookmarkEmpty } from './Icons';
 import { Dot, PlayButton, SubTitle } from './index';
 import movieIcon from '../assets/icon-category-movie.svg';
 import tvSeriesIcon from '../assets/icon-category-tv.svg';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import customFetch from '../utils/axios';
+import { toast } from 'react-toastify';
 
 const SingleMovie = (props) => {
   const { title, year, category, rating, thumbnail, isBookmarked } = props;
   const [isHovered, setIsHovered] = useState(false);
+  const queryClient = useQueryClient();
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -14,6 +18,53 @@ const SingleMovie = (props) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+  };
+
+  const { mutate: createBookmark, isLoading: createBookmarkLoading } =
+    useMutation({
+      mutationFn: async (movieId) =>
+        customFetch.post('/bookmarks', { movieId }),
+      onSuccess: () => {
+        toast.success('Bookmark added', {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        });
+        queryClient.invalidateQueries({ queryKey: ['getTrendingMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['getAllMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movies'] });
+        queryClient.invalidateQueries({ queryKey: ['tvseries'] });
+        queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+      },
+    });
+
+  const { mutate: deleteBookmark, isLoading: deleteBookmarkLoading } =
+    useMutation({
+      mutationFn: async (movieId) => {
+        console.log(movieId, 'movie id check');
+        return customFetch.delete('/bookmarks', { movieId });
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ['getTrendingMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['getAllMovies'] });
+        queryClient.invalidateQueries({ queryKey: ['movies'] });
+        queryClient.invalidateQueries({ queryKey: ['tvseries'] });
+        queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+      },
+    });
+
+  const bookmarkHandler = () => {
+    if (!isBookmarked) {
+      createBookmark(props._id);
+    }
+    if (isBookmarked) {
+      deleteBookmark(props._id);
+    }
   };
 
   return (
@@ -42,6 +93,7 @@ const SingleMovie = (props) => {
           className="bg-primary-black opacity-60 w-8 h-8 absolute top-2 right-2 rounded-full hover:cursor-pointer hover:bg-primary-white transition duration-300 ease-in-out flex items-center justify-center sm:top-4 sm:right-4"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onClick={bookmarkHandler}
         >
           <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
         </button>
