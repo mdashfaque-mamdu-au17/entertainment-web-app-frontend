@@ -6,7 +6,7 @@ const SearchResults = ({ searchTerm, searchResults }) => {
     <section className="mt-6 px-4 sm:mt-[34px] lg:mt-[35px]sm:px-[25px] lg:px-0 lg:ml-[128px] lg:px-8 ">
       <TitleHeading>
         {searchResults.length > 0
-          ? `Found ${searchResults.length} results for ${searchTerm}`
+          ? `Found ${searchResults.length} results for '${searchTerm}'`
           : `No results found for '${searchTerm}'`}
       </TitleHeading>
       {searchResults.length > 0 && (
