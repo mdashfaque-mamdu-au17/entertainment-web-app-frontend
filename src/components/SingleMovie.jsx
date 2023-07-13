@@ -6,6 +6,8 @@ import tvSeriesIcon from '../assets/icon-category-tv.svg';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
 import { toast } from 'react-toastify';
+import iconfull from '../assets/icon-bookmark-full.svg';
+import iconEmpty from '../assets/icon-bookmark-empty.svg';
 
 const SingleMovie = (props) => {
   const { title, year, category, rating, thumbnail, isBookmarked } = props;
@@ -87,9 +89,9 @@ const SingleMovie = (props) => {
           {createBookmarkLoading || deleteBookmarkLoading ? (
             <Spinner isHovered={isHovered} />
           ) : isBookmarked ? (
-            <BookmarkFull isHovered={isHovered} />
+            <img src={iconfull} />
           ) : (
-            <BookmarkEmpty isHovered={isHovered} />
+            <img src={iconEmpty} />
           )}
         </button>
 
