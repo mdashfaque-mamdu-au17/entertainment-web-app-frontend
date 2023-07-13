@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookmarkEmpty } from './Icons';
+import { BookmarkEmpty, Spinner } from './Icons';
 import { Dot, PlayButton, SubTitle } from './index';
 import movieIcon from '../assets/icon-category-movie.svg';
 import tvSeriesIcon from '../assets/icon-category-tv.svg';
@@ -25,16 +25,6 @@ const SingleMovie = (props) => {
       mutationFn: async (movieId) =>
         customFetch.post('/bookmarks', { movieId }),
       onSuccess: () => {
-        toast.success('Bookmark added', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark',
-        });
         queryClient.invalidateQueries({ queryKey: ['getTrendingMovies'] });
         queryClient.invalidateQueries({ queryKey: ['getAllMovies'] });
         queryClient.invalidateQueries({ queryKey: ['movies'] });
@@ -46,7 +36,6 @@ const SingleMovie = (props) => {
   const { mutate: deleteBookmark, isLoading: deleteBookmarkLoading } =
     useMutation({
       mutationFn: async (movieId) => {
-        console.log(movieId, 'movie id check');
         return customFetch.delete(`/bookmarks/${movieId}`, { movieId });
       },
       onSuccess: () => {
@@ -95,7 +84,11 @@ const SingleMovie = (props) => {
           onMouseLeave={handleMouseLeave}
           onClick={bookmarkHandler}
         >
-          <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+          {createBookmarkLoading || deleteBookmarkLoading ? (
+            <Spinner isHovered={isHovered} />
+          ) : (
+            <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+          )}
         </button>
 
         <div className="invisible sm:group-hover/item:visible absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">

@@ -9,6 +9,7 @@ import { useMutation } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
 import { toast } from 'react-toastify';
 import { addUserToLocalStorage } from '../utils/localStorage';
+import { ThreeDots } from '../components/Icons';
 
 const Login = () => {
   const { user, updateLoginUserInfo } = useGlobalContext();
@@ -106,7 +107,7 @@ const Login = () => {
                     disabled={isLoading}
                     style={isLoading && 'cursor-wait hover:cursor-wait'}
                   >
-                    {isLoading ? 'Submitting...' : 'Login to your account'}
+                    {isLoading ? <ThreeDots /> : 'Login to your account'}
                   </Button>
                 </div>
                 <div className="flex flex-row gap-2 pt-6 justify-center items-center">
@@ -116,6 +117,22 @@ const Login = () => {
                   <Title type="medium" color="red">
                     <Link to="/signup">Sign Up</Link>
                   </Title>
+                </div>
+                {/* demo user */}
+                <div className="flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      loginHandler({
+                        email: 'test@yahoo.com',
+                        password: 'secret@123',
+                      });
+                    }}
+                  >
+                    <Title type="medium" color="red">
+                      Demo user
+                    </Title>
+                  </button>
                 </div>
               </Form>
             );

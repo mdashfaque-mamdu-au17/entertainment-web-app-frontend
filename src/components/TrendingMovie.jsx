@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookmarkEmpty, BookmarkFull } from '../components/Icons';
+import { BookmarkEmpty, BookmarkFull, Spinner } from '../components/Icons';
 import SubTitle from './SubTitle';
 import movieIcon from '../assets/icon-category-movie.svg';
 import tvSeriesIcon from '../assets/icon-category-tv.svg';
@@ -7,7 +7,6 @@ import Dot from './Dot';
 import PlayButton from './PlayButton';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
-import { toast } from 'react-toastify';
 
 const TrendingMovie = (props) => {
   const { title, year, category, rating, thumbnail, isBookmarked } = props;
@@ -27,16 +26,6 @@ const TrendingMovie = (props) => {
       mutationFn: async (movieId) =>
         customFetch.post('/bookmarks', { movieId }),
       onSuccess: () => {
-        toast.success('Bookmark added', {
-          position: 'top-center',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark',
-        });
         queryClient.invalidateQueries({ queryKey: ['getTrendingMovies'] });
         queryClient.invalidateQueries({ queryKey: ['getAllMovies'] });
         queryClient.invalidateQueries({ queryKey: ['movies'] });
@@ -48,7 +37,6 @@ const TrendingMovie = (props) => {
   const { mutate: deleteBookmark, isLoading: deleteBookmarkLoading } =
     useMutation({
       mutationFn: async (movieId) => {
-        console.log(movieId, 'movie id check');
         return customFetch.delete(`/bookmarks/${movieId}`, { movieId });
       },
       onSuccess: () => {
@@ -91,7 +79,11 @@ const TrendingMovie = (props) => {
         onMouseLeave={handleMouseLeave}
         onClick={bookmarkHandler}
       >
-        <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+        {createBookmarkLoading || deleteBookmarkLoading ? (
+          <Spinner isHovered={isHovered} />
+        ) : (
+          <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+        )}
       </button>
 
       <div className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6">

@@ -8,7 +8,8 @@ import { useMutation } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
 import { addUserToLocalStorage } from '../utils/localStorage';
 import { useGlobalContext } from '../context';
-import { Link, redirect, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { ThreeDots } from '../components/Icons';
 
 const Signup = () => {
   const { user, updateLoginUserInfo } = useGlobalContext();
@@ -76,7 +77,6 @@ const Signup = () => {
               .oneOf([Yup.ref('password')], 'password must match'),
           })}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            console.log({ ...values });
             setSubmitting(true);
             try {
               signupHandler({
@@ -124,7 +124,7 @@ const Signup = () => {
                     disabled={isLoading}
                     style={isLoading && 'cursor-wait hover:cursor-wait'}
                   >
-                    {isLoading ? 'Submitting...' : 'Create an account'}
+                    {isLoading ? <ThreeDots /> : 'Create an account'}
                   </Button>
                 </div>
                 <div className="flex flex-row gap-2 pt-6 justify-center items-center">
