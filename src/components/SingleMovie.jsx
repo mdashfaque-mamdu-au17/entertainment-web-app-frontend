@@ -47,7 +47,7 @@ const SingleMovie = (props) => {
     useMutation({
       mutationFn: async (movieId) => {
         console.log(movieId, 'movie id check');
-        return customFetch.delete('/bookmarks', { movieId });
+        return customFetch.delete(`/bookmarks/${movieId}`, { movieId });
       },
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ['getTrendingMovies'] });
