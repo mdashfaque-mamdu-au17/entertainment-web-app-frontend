@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookmarkEmpty, BookmarkFull, Spinner } from '../components/Icons';
+import { Spinner } from '../components/Icons';
 import SubTitle from './SubTitle';
 import movieIcon from '../assets/icon-category-movie.svg';
 import tvSeriesIcon from '../assets/icon-category-tv.svg';
@@ -7,19 +7,12 @@ import Dot from './Dot';
 import PlayButton from './PlayButton';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import customFetch from '../utils/axios';
+import bookmarkedFull from '../assets/icon-bookmark-full.svg';
+import bookmarkedEmpty from '../assets/icon-bookmark-empty.svg';
 
 const TrendingMovie = (props) => {
   const { title, year, category, rating, thumbnail, isBookmarked } = props;
-  const [isHovered, setIsHovered] = useState(false);
   const queryClient = useQueryClient();
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
 
   const { mutate: createBookmark, isLoading: createBookmarkLoading } =
     useMutation({
@@ -74,17 +67,13 @@ const TrendingMovie = (props) => {
 
       <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-gradient-to-r from-black to-black opacity-0 transition duration-300 ease-in-out hover:opacity-50 hover:cursor-pointer"></div>
       <button
-        className="bg-primary-black opacity-60 w-8 h-8 absolute top-2 right-2 rounded-full hover:cursor-pointer hover:bg-primary-white transition duration-300 ease-in-out flex items-center justify-center sm:top-4 sm:right-6"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        className="bg-primary-black opacity-60 w-8 h-8 absolute top-2 right-2 rounded-full hover:cursor-pointer transition duration-300 ease-in-out flex items-center justify-center sm:top-4 sm:right-6"
         onClick={bookmarkHandler}
       >
         {createBookmarkLoading || deleteBookmarkLoading ? (
-          <Spinner isHovered={isHovered} />
-        ) : isBookmarked ? (
-          <BookmarkFull isHovered={isHovered} />
+          <Spinner />
         ) : (
-          <BookmarkEmpty isHovered={isHovered} />
+          <img src={isBookmarked ? bookmarkedFull : bookmarkedEmpty} />
         )}
       </button>
 
