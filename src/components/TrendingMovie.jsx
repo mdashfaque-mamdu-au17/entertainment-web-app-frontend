@@ -81,8 +81,10 @@ const TrendingMovie = (props) => {
       >
         {createBookmarkLoading || deleteBookmarkLoading ? (
           <Spinner isHovered={isHovered} />
+        ) : isBookmarked ? (
+          <BookmarkFull isHovered={isHovered} />
         ) : (
-          <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+          <BookmarkEmpty isHovered={isHovered} />
         )}
       </button>
 

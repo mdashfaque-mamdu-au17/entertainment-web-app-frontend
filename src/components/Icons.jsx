@@ -42,25 +42,25 @@ export const BookmarkIcon = ({ color }) => {
   );
 };
 
-export const BookmarkEmpty = ({ isBookmarked, isHovered }) => {
+export const BookmarkEmpty = ({ isHovered }) => {
   const strokeColor = isHovered ? '#000' : '#FFF';
-  const fillColor = isBookmarked ? '#fff' : 'none';
+  const fillColor = '#fff';
   return (
-    <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
+    <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
         stroke={strokeColor}
         strokeWidth="1.5"
-        fill={fillColor}
+        fill="none"
       />
     </svg>
   );
 };
 
-export const BookmarkFull = ({ isBookmarked, isHovered }) => {
+export const BookmarkFull = ({ isHovered }) => {
   const strokeColor = isHovered ? '#000' : '#FFF';
   return (
-    <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
+    <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M10.61 0c.14 0 .273.028.4.083a1.03 1.03 0 0 1 .657.953v11.928a1.03 1.03 0 0 1-.656.953c-.116.05-.25.074-.402.074-.291 0-.543-.099-.756-.296L5.833 9.77l-4.02 3.924c-.218.203-.47.305-.756.305a.995.995 0 0 1-.4-.083A1.03 1.03 0 0 1 0 12.964V1.036A1.03 1.03 0 0 1 .656.083.995.995 0 0 1 1.057 0h9.552Z"
         stroke={strokeColor}
@@ -82,18 +82,18 @@ export const Spinner = ({ isHovered }) => {
     >
       <defs>
         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-          <stop stop-color={color} stop-opacity="0" offset="0%" />
-          <stop stop-color={color} stop-opacity=".631" offset="63.146%" />
-          <stop stop-color={color} offset="100%" />
+          <stop stopColor={color} stopOpacity="0" offset="0%" />
+          <stop stopColor={color} stopOpacity=".631" offset="63.146%" />
+          <stop stopColor={color} offset="100%" />
         </linearGradient>
       </defs>
-      <g fill="none" fill-rule="evenodd">
+      <g fill="none" fillRule="evenodd">
         <g transform="translate(1 1)">
           <path
             d="M36 18c0-9.94-8.06-18-18-18"
             id="Oval-2"
             stroke="url(#a)"
-            stroke-width="2"
+            strokeWidth="2"
           >
             <animateTransform
               attributeName="transform"
@@ -141,7 +141,7 @@ export const ThreeDots = () => {
           repeatCount="indefinite"
         />
         <animate
-          attributeName="fill-opacity"
+          attributeName="fillOpacity"
           from="1"
           to="1"
           begin="0s"
@@ -151,7 +151,7 @@ export const ThreeDots = () => {
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+      <circle cx="60" cy="15" r="9" fillOpacity="0.3">
         <animate
           attributeName="r"
           from="9"
@@ -163,7 +163,7 @@ export const ThreeDots = () => {
           repeatCount="indefinite"
         />
         <animate
-          attributeName="fill-opacity"
+          attributeName="fillOpacity"
           from="0.5"
           to="0.5"
           begin="0s"
@@ -185,7 +185,7 @@ export const ThreeDots = () => {
           repeatCount="indefinite"
         />
         <animate
-          attributeName="fill-opacity"
+          attributeName="fillOpacity"
           from="1"
           to="1"
           begin="0s"

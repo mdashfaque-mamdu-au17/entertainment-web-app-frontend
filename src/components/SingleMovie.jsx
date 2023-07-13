@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BookmarkEmpty, Spinner } from './Icons';
+import { BookmarkEmpty, BookmarkFull, Spinner } from './Icons';
 import { Dot, PlayButton, SubTitle } from './index';
 import movieIcon from '../assets/icon-category-movie.svg';
 import tvSeriesIcon from '../assets/icon-category-tv.svg';
@@ -86,8 +86,10 @@ const SingleMovie = (props) => {
         >
           {createBookmarkLoading || deleteBookmarkLoading ? (
             <Spinner isHovered={isHovered} />
+          ) : isBookmarked ? (
+            <BookmarkFull isHovered={isHovered} />
           ) : (
-            <BookmarkEmpty isBookmarked={isBookmarked} isHovered={isHovered} />
+            <BookmarkEmpty isHovered={isHovered} />
           )}
         </button>
 
